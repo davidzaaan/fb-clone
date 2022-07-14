@@ -1,0 +1,127 @@
+body {
+    background-color: #F0F2F5;
+}
+
+h1 {
+    color: #3285F2;
+}
+
+input {
+    outline: none;
+}
+
+/* darkmode styling */
+.dark-mode {
+    /* background-color: #242526 !important; */
+    color: #E4E6EB !important;
+}
+
+.dark-mode-divs {
+    background-color: #242526 !important;
+    color: #E4E6EB !important;
+}
+
+.index-container {
+    width: 80vw;
+    /* background-color: red; */
+    margin: 20vh auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.index-desc {
+    max-width: 40%;
+    margin: 40px;
+}
+
+.index-desc h1 {
+    font-size: 3.7rem;
+}
+
+.index-desc p {
+    font-size: 1.4rem;
+}
+
+.index-form {
+    width: 35%;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.gg-eye-alt {
+    position: relative;
+    left: 87%;
+    bottom: 2.4rem;
+    cursor: pointer;
+}
+
+input[type=submit] {
+    width: 100%;
+}
+
+#forgot-password {
+    margin: 13px auto 7px auto;
+}
+
+hr {
+    color: grey;
+}
+
+.btn-success {
+    margin-top: 15px;
+    width: 50%;
+    align-self: center;
+}
+
+@media (max-width: 980px) {
+    .index-container {
+        flex-direction: column;
+        align-items: center;
+        margin: 7vh auto;
+    }
+
+    .index-desc {
+        max-width: 60%;
+    }
+
+    .index-desc h1 {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+    
+    .index-desc p {
+        font-size: 1.2rem;
+    }
+
+    .index-form {
+        width: 65%;
+    }
+}
+
+@media (max-width: 550px) {
+    .index-container {
+        width: 90vw;
+    }
+
+    .index-desc {
+        max-width: 60%;
+    }
+
+    .index-desc h1 {
+        font-size: 2.2rem;
+    }
+    
+    .index-desc p {
+        font-size: 1rem;
+    }
+
+    .index-form {
+        width: 96%;
+    }
+}

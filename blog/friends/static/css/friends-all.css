@@ -1,0 +1,177 @@
+.friends-page-container {
+    width: 90vw;
+    /* height: 92vh; */
+    /* background-color: aqua; */
+    display: flex;
+}
+
+.friends-page-options {
+    width: 20%;
+    background-color: var(--post-bg);
+    color: var(--text-color);
+    height: 92vh;
+    position: sticky;
+    top: 0;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.19), 0 2px 2px rgba(0, 0, 0, 0.23);
+}
+
+.friends-page-options a {
+    font-size: .8rem;
+    margin: 6px 10px;
+}
+
+
+
+.friends-page-options-header {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.friends-page-options-header h1 {
+    /* color: black; */
+    margin: 10px 0px;
+    font-size: 1.6rem;
+}
+
+.friends-page-options-header a {
+    /* color: black; */
+    width: 35px;
+    height: 35px;
+    margin: 10px 5px;
+    font-size: 1.3rem;
+    /* background-color: rgba(0, 0, 0, .02); */
+    /* padding: 8px; */
+    border-radius: 50%;
+    text-align: center;
+}
+
+
+.friends-page-list {
+    width: 70%;
+    /* background-color: blue; */
+    margin: 10px auto;
+
+}
+
+.friends-list {
+    /* background-color: red; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.friends-list-header {
+    align-self: flex-start;
+}
+
+.friends-list-header h1 {
+    font-size: 1.4rem;
+}
+
+#list {
+    align-self: flex-start;
+    /* background-color: green; */
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin-top: 13px;
+    width: 18rem;
+    height: 550px;
+    border-radius: 14px;
+    background-color: var(--post-bg);
+    color: var(--text-color);
+}
+
+.card img {
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-position: center;
+}
+
+.card-body {
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card a {
+    display: block;
+    font-size: .9rem;
+    margin-bottom: 10px;
+    border: none;
+    width: 100%;
+}
+
+
+/* --------------------- */
+
+@media (max-width: 900px) {
+    .friends-page-container {
+        width: 99vw;
+        margin: auto;
+        flex-direction: column;
+    }
+
+    #list .card {
+        margin-top: 13px;
+        max-width: 90%;
+        text-align: center;
+    }
+
+    #list .card a {
+        font-size: .6rem;
+    }
+
+    .friends-page-options {
+        width: 100%;
+        height: 15%;
+        z-index: 1;
+        /* position: static; */
+    }
+
+    .friends-page-options h1 {
+        font-size: 1.3rem;
+    }
+
+    .friends-page-options-list a {
+        font-size: .9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .friends-page-container {
+        margin: auto;
+        flex-direction: column;
+    }
+
+    #list .card {
+        margin-top: 13px;
+        max-width: 90%;
+    }
+
+    #list .card a {
+        font-size: .6rem;
+    }
+
+    .friends-page-list {
+        width: 100%;
+    }
+
+    .friends-page-options h1 {
+        font-size: 1.2rem;
+    }
+
+    .friends-page-options-list a {
+        font-size: .7rem;
+    }
+}

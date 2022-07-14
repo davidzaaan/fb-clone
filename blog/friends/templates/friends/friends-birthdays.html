@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Birthdays {% endblock title %}
+
+{% block content %}
+{% include 'navbar.html' with navbar_title="Friends" %}
+
+<div class="friends-page-container">
+    <div class="friends-page-options">
+        <div class="friends-page-options-header">
+            <a href="{{ request.GET.next }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </a>
+            <h1>Birthdays</h1>
+        </div>
+    </div>
+
+    <div class="friends-page-list">
+        <div class="friends-list">
+            
+            <div id="list">
+                {% for month, friend_list in birthdays.items %}
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h1>{{ month }}</h1>
+                        </div>
+                        
+                        <i style="opacity: 0.4;">
+                            {{ friend_list|length }} friends celebrate their birthdays this month
+                        </i>
+                        <div class="card-body-monthly">
+                            {% for friend in friend_list %}
+                            <a href="{% url 'profile' friend.id %}" class="friends-birthday-image">
+                                <img class="card-img-top" src="{{ friend.profile_photo.url }}" alt="Card image cap">
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="{% static 'css/friends-birthdays.css' %}">
+{% endblock content %}

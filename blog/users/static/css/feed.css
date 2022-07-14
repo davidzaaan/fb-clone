@@ -1,0 +1,323 @@
+/* Flashing messages styling (if any) */
+.message {
+    display: flex;
+    justify-content: space-between;
+    max-width: 55%;
+    margin: auto;
+}
+
+.close__message {
+    cursor: pointer;
+}
+
+/* End of flashing messages styling */
+
+.create_post__btn {
+    background-color: var(--post-bg);
+    color: var(--text-color);
+    width: 200px;
+    max-width: 300px;
+    height: 26px;
+    cursor: pointer;
+    margin: 20px auto;
+    text-align: center;
+    border-radius: 7px;
+    transition: 0.3s;
+}
+
+
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s;
+    z-index: 1;
+}
+
+.bg-active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.create__post {
+    width: 45%;
+    min-height: 40%;
+    background-color: var(--create-post-bg);
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    border-radius: 10px;
+}
+
+.create__post h2 {
+    align-self: flex-start;
+    margin: 10px;
+}
+
+.create__post textarea[name="description"] {
+    width: 90%;
+    height: 70%;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    background-color: var(--text-boxes);
+    color: var(--text-color);
+    padding: 20px;
+    margin: 14px;
+}
+
+.create__post button {
+    width: 95%;
+    cursor: pointer;
+    background-color: #1a74e4;
+    border: none;
+    padding: 5px;
+    color: #fff;
+    border-radius: 4px;
+    margin: 10px;
+}
+
+.create_post__close {
+    position: absolute;
+    width: 40px;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    padding: 7px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.create_post__close:hover {
+    opacity: 0.7;
+}
+
+
+/* POSTS LIST STYLING */
+
+.post {
+    width: 500px;
+    /* min-height: 280px; */
+    /* max-height: 800px; */
+    /* height: 345px; */
+    /* height: auto; */
+    background-color: var(--post-bg);
+    border-radius: 10px;
+    padding: 12px;
+    margin: 20px auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    color: var(--text-color);
+    overflow: auto;
+}
+
+.owner {
+    width: 100%;
+    height: 70px;
+    /*   background-color: red; */
+    border-radius: 10px;
+    display: flex;
+}
+
+.owner-photo {
+    width: 48px;
+    height: 48px;
+    /* background-color: #fff; */
+    align-self: center;
+    border-radius: 50%;
+}
+
+.owner-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-position: center;
+    border-radius: 50%;
+}
+
+.owner-stats {
+    margin: 10px 0px 10px 7px;
+}
+
+#author {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* ----- Description styling ---- */
+
+/* ----- Picture styling ------ */
+.picture {
+    width: 100%;
+    height: 420px;
+    background-color: #000;
+}
+
+.picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-position: center;
+}
+
+/* ------- Stats styling ------- */
+.stats {
+    margin: 13px 0 10px 0;
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* .commented_by {
+    margin-left: 10px;
+} */
+
+.commented_by a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.commented_by a:hover {
+    color: #5f94f6;
+    text-decoration: underline;
+}
+
+/* ----- Interaction styling ----- */
+.interact {
+    /*   margin-top: 10px; */
+    /*   background-color: blue; */
+    display: flex;
+    justify-content: space-around;
+}
+
+.mybtn {
+    width: 32%;
+    background-color: inherit;
+    border: none;
+    /* dark mode setting */
+    color: var(--text-color);
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.mybtn:hover {
+    background-color: var(--interact-btns-hover);
+}
+
+/* dark mode styling for interaction buttons */
+/* .interact>.feed__dark_mode:hover {
+    background-color: var(--interact-btns-hover);
+} */
+
+/* Make a comment styling */
+.make_a_comment,
+.comments__made {
+    width: 100%;
+    margin: 13px 0 10px 0;
+    /* height: 40px; */
+    /*   background-color: #999; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment__photo {
+    width: 40px;
+    height: 40px;
+    background-color: #ddd;
+    border-radius: 50%;
+}
+
+.comment__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-position: center;
+    border-radius: 50%;
+}
+
+.comment_form {
+    /*   background-color: red; */
+    width: 88%;
+    display: flex;
+    /* margin-bottom: 10px; */
+    /* padding-bottom: 10px; */
+}
+
+.comment_text {
+    outline: none;
+    resize: none;
+    width: 100%;
+    height: 44px;
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+    background-color: var(--text-boxes);
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+/* .comment_text::-webkit-scrollbar {
+    width: 0px;
+} */
+
+/* ------- little lines <hr> styling  ------- */
+hr {
+    border: none;
+    margin: 5px;
+    height: .02em;
+    /* ---- dark mode setting ----*/
+    background-color: #ccc;
+    /* opacity: 0.6; */
+}
+
+
+/* dark mode class that is applied to the post element */
+.feed__dark_mode {
+    color: #fef4f5;
+    background-color: #242527;
+}
+
+/* dark mode class that is applied to the comment post element */
+.comment_text__dark_mode {
+    background-color: #3a3b3d;
+    color: #fef4f5;
+}
+
+
+
+@media (max-width: 600px) {
+    .post {
+        width: 100%;
+        border-radius: 0;
+    }
+
+}
+
+@media (max-width: 870px) {
+    .create__post {
+        width: 95%;
+        min-height: 30%;
+    }
+
+    /* .create_post__close {
+        width: 40px;
+    } */
+}
+
+@media (max-width: 430px) {
+    /* .post {
+        max-height: 900px;
+    } */
+}

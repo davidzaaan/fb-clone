@@ -1,0 +1,23 @@
+body {
+    --text-color: #000;
+    --create-post-bg: #ffffff;
+    --text-boxes: #f1f2f6;
+    --btn-hovering: #555;
+    --post-bg: #ffffff;
+    --links-text-color: #787675;
+    --background-color: #f1f2f6;
+    --interact-btns-hover: #ddd;
+    background-color: #f1f2f6;
+}
+
+body.dark-mode {
+    --text-color: #f1f2f6;
+    --create-post-bg: #242527;
+    --text-boxes: #3a3b3d;
+    --btn-hovering: #555;
+    --post-bg: #242527;
+    --links-text-color: #abaeb1;
+    --background-color: #18191b;
+    --interact-btns-hover: #555;
+    background-color: #18191b;
+}

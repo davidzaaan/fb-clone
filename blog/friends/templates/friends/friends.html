@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load friends %}
+
+{% block title %} Friends | My Blog {% endblock title %}
+
+{% block content %}
+{% include 'navbar.html' with navbar_title="Friends" %}
+
+<div class="friends-page-container">
+    <div class="friends-page-options">
+        <h1>Friends</h1>
+
+        <div class="friends-page-options-list">
+            <a href="{% url 'friends' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+                    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                </svg>
+                Home
+            </a>
+            <a href="{% url 'friend-requests' %}?next=/friends">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                </svg>
+                Friend Requests
+            </a>
+
+            <a href="{% url 'friend-suggestions' %}?next=/friends">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                    <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                </svg>
+                Suggestions
+            </a>
+
+            <a href="{% url 'all-friends' %}?next=/friends">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                </svg>
+                My Friends
+            </a>
+
+            <a href="{% url 'friends-birthdays' %}?next=/friends">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gift-fill" viewBox="0 0 16 16">
+                    <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zm6 4v7.5a1.5 1.5 0 0 1-1.5 1.5H9V7h6zM2.5 16A1.5 1.5 0 0 1 1 14.5V7h6v9H2.5z"/>
+                </svg>
+                Birthdays
+            </a>
+
+            <a href="{% url 'close-friends' %}?next=/friends">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                </svg>
+                Close Friends
+            </a>
+        </div>
+    </div>
+
+    <div class="friends-page-list">
+        <div class="friends-list">
+            <h1>People you may know</h1>
+            <div id="list">
+                {% for friend in friends %}
+                    {% if not request.user.profile.id|is_friend:friend.id %}
+                        <div class="card">
+                            <img class="card-img-top" src="{{ friend.profile_photo.url }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="mb-3">{{ friend.name }}</h5>
+                                <!-- <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                <div>
+                                    {% if request.user.profile.id|has_sent_a_fr:friend.id %}
+                                        <a id="add_fr_btn_{{friend.id}}" class="btn btn-primary" onclick="addFriend('{{ friend.id }}', '{{ request.user.profile.id }}');" style="background-color: #555;">Cancel friend request</a>
+                                    {% elif request.user.profile.id|is_in_fr:friend.id %}
+                                        <a id="accept_fr_btn_{{friend.id}}" class="btn btn-primary" onclick="acceptFR('{{ friend.id }}', '{{ request.user.profile.id }}');">Accept friend request</a>
+                                        <a id="delete_fr_btn_{{friend.id}}" class="btn btn-primary" onclick="deleteFR('{{ friend.id }}', '{{ request.user.profile.id }}');" style="background-color: #555;">Delete</a>
+                                    {% else %}
+                                        <a id="add_fr_btn_{{friend.id}}" class="btn btn-primary" onclick="addFriend('{{ friend.id }}', '{{ request.user.profile.id }}');">Add Friend</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="{% static 'css/friends.css' %}">
+<script src="{% static 'js/friends.js' %}"></script>
+{% endblock content %}

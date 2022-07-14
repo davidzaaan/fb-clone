@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Homepage {% endblock title %}
+
+{% block content %}
+    <div class="index-container">
+        <div class="index-desc">
+            <h1>My Blog</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt exercitationem eaque numquam esse, consequatur quidem nesciunt? Maiores illo delectus velit hic, labore in repudiandae modi nemo eius? Repellendus, quaerat distinctio?</p>
+        </div>
+        <div class="index-form">
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+                    <label for="floatingInput">Email</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                    <i class="gg-eye-alt" id="show-password"></i>
+                    <label for="floatingPassword">Password</label>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Log In">
+            </form>
+            <a href="{% url 'password_reset' %}?next=/" id="forgot-password">Forgot password?</a>
+            <hr>
+            <a href="{% url 'register' %}" class="btn btn-success">Create new account</a>
+        </div>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-warning message" role="alert">
+                    {{ message }}
+                    <span class="close__message">X</span>
+                </div>
+            {% else %}
+            <div class="alert alert-{{message.tags}} message" role="alert">
+                {{ message }}
+                <span class="close__message">X</span>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <script src="{% static 'js/index.js' %}"></script>
+{% endblock content %}

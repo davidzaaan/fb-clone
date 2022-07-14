@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Register {% endblock title %}
+
+{% block content %}
+    <div class="register-container">
+        <div class="register-form">
+            <div class="register-desc">
+                <h1>Join</h1>
+            </div>
+            <form action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="" name="name">
+                    <label for="floatingInput">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingEmail" placeholder="" name="email">
+                    <label for="floatingEmail">Email</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="floatingDate" placeholder="" name="birthday">
+                    <label for="floatingDate">Birthday</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="" name="password">
+                    <i class="gg-eye-alt" id="show-new-password"></i>
+                    <label for="floatingPassword">Password</label>
+                </div>
+                
+                <input type="submit" class="btn btn-primary" value="Register">
+            </form>
+            <hr>
+            <p>Already have an account? <a href="{% url 'login' %}">Log In</a></p>
+        </div>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-warning message" role="alert">
+                    {{ message }}
+                </div>
+            {% else %}
+            <div class="alert alert-{{message.tags}} message" role="alert">
+                {{ message }}
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <script src="{% static 'js/register.js' %}"></script>
+{% endblock content %}
