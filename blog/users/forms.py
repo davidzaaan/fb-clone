@@ -26,7 +26,14 @@ class ProfileForm(ModelForm):
 class EditProfileForm(ModelForm):
     class Meta:
         model = Profile
-        fields = '__all__'
+        fields = [
+            'name',
+            'email',
+            'bio',
+            'birthday',
+            'profile_photo',
+            'cover_photo'
+        ]
 
 
 class PostForm(ModelForm):
