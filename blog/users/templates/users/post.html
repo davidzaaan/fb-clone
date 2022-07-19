@@ -56,7 +56,7 @@
     
     <hr>
     <div class="interact">
-      {% if current_user_id|has_liked:post.id %}
+      {% if request.user.username|has_liked:post.id %}
           <button class="mybtn" id="like__btn_{{ post.id }}" onclick="like('{{post.id}}', '{{ request.user.username }}');" style="color: #2d85ff;">
             Liked
           </button>
@@ -67,7 +67,7 @@
       {% endif %}
       <button class="mybtn" id="comment__btn" onclick="commentBoxFocus('comment_box_{{ post.id }}');">Comment</button>
       
-      {% if current_user_id|has_disliked:post.id %}
+      {% if request.user.username|has_disliked:post.id %}
           <button class="mybtn" id="dislike__btn_{{ post.id }}" onclick="dislike('{{post.id}}', '{{ request.user.username }}');" style="color: #cc0001;">
             Disliked
           </button>
