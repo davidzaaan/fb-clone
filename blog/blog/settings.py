@@ -24,10 +24,13 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = str(os.environ.get("DEBUG")) == "1"
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = [
+    os.environ.get("ALLOWED_HOST"),
+    os.environ.get("ALLOWED_DEBUG_HOST")
+    ]
 
-if not DEBUG:
-    ALLOWED_HOSTS += [os.environ.get("ALLOWED_HOST")]
+# if not DEBUG:
+#     ALLOWED_HOSTS += [os.environ.get("ALLOWED_HOST")]
 
 
 # Application definition
@@ -134,7 +137,8 @@ USE_I18N = True
 USE_TZ = True
 
 CORS_ALLOWED_ORIGINS = [
-    os.environ.get("CORS_ALLOWED_ORIGINS")
+    os.environ.get("CORS_ALLOWED_ORIGINS"),
+    os.environ.get("CORS_ALLOWED_ORIGINS_DEBUG"),
 ]
 
 CORS_ALLOW_METHODS = [
@@ -158,6 +162,7 @@ CORS_ALLOW_HEADERS = [
 
 CSRF_TRUSTED_ORIGINS = [
     os.environ.get("CSRF_TRUSTED_ORIGINS"),
+    os.environ.get("CSRF_TRUSTED_ORIGINS_DEBUG"),
 ]
 
 CSRF_COOKIE_SECURE = True

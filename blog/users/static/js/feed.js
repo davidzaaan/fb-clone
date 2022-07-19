@@ -38,9 +38,10 @@ function getCSRFToken(cookie) {
 
 
 /**************************** Like post functionality ************************************/
-function like(post_id, likedById) {
+function like(post_id, likedBy) {
 
-    const resourceLink = `http://localhost:8000/api/posts/addlike/${post_id}/${likedById}/`;
+    const resourceLink = `http://localhost:8000/api/posts/addlike/${post_id}/${likedBy}/`;
+
 
     // Parsing all the cookies to get the CSRF token
     let csrfToken = getCSRFToken(document.cookie);
@@ -62,7 +63,7 @@ function like(post_id, likedById) {
     }
 
     if (likeButton.innerText === "Liked") {
-        removeLike(post_id, csrfToken, likesCount, likeButton, likedById);
+        removeLike(post_id, csrfToken, likesCount, likeButton, likedBy);
         return;
     }
 
@@ -99,8 +100,8 @@ function like(post_id, likedById) {
 }
 
 
-function removeLike(post_id, csrfToken, likesCount, likeButton, likedById) {
-    const resourceLink = `http://localhost:8000/api/posts/remove_like/${post_id}/${likedById}/`;
+function removeLike(post_id, csrfToken, likesCount, likeButton, likedBy) {
+    const resourceLink = `http://localhost:8000/api/posts/remove_like/${post_id}/${likedBy}/`;
 
     // Init object parameter to fetch function
     const init = {
@@ -124,9 +125,9 @@ function removeLike(post_id, csrfToken, likesCount, likeButton, likedById) {
 
 
 /************************ Dislike post functionality ***********************/
-function dislike(post_id, dislikedById) {
+function dislike(post_id, dislikedBy) {
 
-    const resourceLink = `http://localhost:8000/api/posts/add_dislike/${post_id}/${dislikedById}/`;
+    const resourceLink = `http://localhost:8000/api/posts/add_dislike/${post_id}/${dislikedBy}/`;
     let csrfToken = document.cookie;
 
     // Getting the post likes count element
@@ -148,7 +149,7 @@ function dislike(post_id, dislikedById) {
     }
 
     if (dislikeButton.innerText === "Disliked") {
-        removeDislike(post_id, csrfToken, dislikesCount, dislikeButton, dislikedById);
+        removeDislike(post_id, csrfToken, dislikesCount, dislikeButton, dislikedBy);
         return;
     }
 
@@ -181,8 +182,8 @@ function dislike(post_id, dislikedById) {
 }
 
 
-function removeDislike(post_id, csrfToken, dislikesCount, dislikeButton, dislikedById) {
-    const resourceLink = `http://localhost:8000/api/posts/remove_dislike/${post_id}/${dislikedById}/`;
+function removeDislike(post_id, csrfToken, dislikesCount, dislikeButton, dislikedBy) {
+    const resourceLink = `http://localhost:8000/api/posts/remove_dislike/${post_id}/${dislikedBy}/`;
 
     // Init object parameter to fetch function
     const init = {

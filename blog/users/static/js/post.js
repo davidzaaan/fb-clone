@@ -21,9 +21,9 @@ function getCSRFToken(cookie) {
 
 
 /************************ Like post functionality ***********************/
-function like(post_id, likedById) {
+function like(post_id, likedBy) {
 
-    const resourceLink = `http://localhost:8000/api/posts/addlike/${post_id}/${likedById}/`;
+    const resourceLink = `http://localhost:8000/api/posts/addlike/${post_id}/${likedBy}/`;
     let csrfToken = document.cookie;
 
     // Getting the post likes count element
@@ -44,7 +44,7 @@ function like(post_id, likedById) {
     }
 
     if (likeButton.innerText === "Liked") {
-        removeLike(post_id, csrfToken, likesCount, likeButton, likedById);
+        removeLike(post_id, csrfToken, likesCount, likeButton, likedBy);
         return;
     }
 
@@ -77,8 +77,8 @@ function like(post_id, likedById) {
 }
 
 
-function removeLike(post_id, csrfToken, likesCount, likeButton, likedById) {
-    const resourceLink = `http://localhost:8000/api/posts/remove_like/${post_id}/${likedById}/`;
+function removeLike(post_id, csrfToken, likesCount, likeButton, likedBy) {
+    const resourceLink = `http://localhost:8000/api/posts/remove_like/${post_id}/${likedBy}/`;
 
     // Init object parameter to fetch function
     const init = {

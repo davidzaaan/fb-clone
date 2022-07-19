@@ -1,5 +1,6 @@
 from .serializers import PostSerializer, ProfileSerializer
 from users.models import Post, Comment, Profile
+from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework import status
 
@@ -47,6 +48,7 @@ def add_like(request: HttpRequest, post_id: str, liked_by: str) -> Response:
     """
     try:
         post: Post = Post.objects.get(id=post_id) # OPTIMIZE TO GET ONLY THE LIKES
+        user: User = User.objects.get(username=liked_by) # OPTIMIZE
     except Post.DoesNotExist:
         return Response({'error': 'Object does not exist'}, status=status.HTTP_404_NOT_FOUND)
     except ValidationError:
@@ -54,13 +56,12 @@ def add_like(request: HttpRequest, post_id: str, liked_by: str) -> Response:
     
     # Check later
     # post: Post = get_object_or_404(Post, id=post_id)
-    
-    post.add_like(liked_by)
+    user_id: str = str(user.profile.id)
 
-    if post.has_already_disliked(liked_by):
-        post.remove_dislike(liked_by)
+    post.add_like(user_id)
 
-    post.save()
+    if post.has_already_disliked(user_id):
+        post.remove_dislike(user_id)
 
     return Response({
         'success': 'so far so good',
@@ -79,13 +80,15 @@ def remove_like(request: HttpRequest, post_id: str, like_removed_by: str) -> Res
     """
     try:
         post: Post = Post.objects.get(id=post_id) # OPTIMIZE TO GET ONLY THE LIKES
+        user: User = User.objects.get(username=like_removed_by) # OPTIMIZE
     except Post.DoesNotExist:
         return Response({'error': 'Object does not exist'}, status=status.HTTP_404_NOT_FOUND)
     except ValidationError:
         return Response({'error': 'Object does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
-    post.remove_like(like_removed_by)
-    post.save()
+    user_id: str = str(user.profile.id)
+
+    post.remove_like(user_id)
 
     return Response({
         'success': 'so far so good',
@@ -95,7 +98,7 @@ def remove_like(request: HttpRequest, post_id: str, like_removed_by: str) -> Res
 
 
 @api_view(['PATCH'])
-def add_dislike(request: HttpRequest, post_id: str, disliked_by_id: str) -> Response:
+def add_dislike(request: HttpRequest, post_id: str, disliked_by: str) -> Response:
     """
     Function that updates the dislikes count from an specific post
     Args: request -> HttpRequest type object
@@ -105,6 +108,7 @@ def add_dislike(request: HttpRequest, post_id: str, disliked_by_id: str) -> Resp
     """
     try:
         post: Post = Post.objects.get(id=post_id) # OPTIMIZE TO GET ONLY THE DISLIKES
+        user: User = User.objects.get(username=disliked_by) # OPTIMIZE
     except Post.DoesNotExist:
         return Response({'error': 'Object does not exist'}, status=status.HTTP_404_NOT_FOUND)
     except ValidationError:
@@ -112,13 +116,12 @@ def add_dislike(request: HttpRequest, post_id: str, disliked_by_id: str) -> Resp
     
     # Check later
     # post: Post = get_object_or_404(Post, id=post_id)
-    
-    post.add_dislike(disliked_by_id)
+    user_id: str = str(user.profile.id)
 
-    if post.has_already_liked(disliked_by_id):
-        post.remove_like(disliked_by_id)
+    post.add_dislike(user_id)
 
-    post.save()
+    if post.has_already_liked(user_id):
+        post.remove_like(user_id)
 
     return Response({
         'success': 'so far so good',
@@ -129,7 +132,7 @@ def add_dislike(request: HttpRequest, post_id: str, disliked_by_id: str) -> Resp
 
 
 @api_view(['PATCH'])
-def remove_dislike(request: HttpRequest, post_id: str, dislike_removed_by_id: str) -> Response:
+def remove_dislike(request: HttpRequest, post_id: str, dislike_removed_by: str) -> Response:
     """
     Function that updates the dislikes count from an specific post
     Args: request -> HttpRequest type object
@@ -140,13 +143,15 @@ def remove_dislike(request: HttpRequest, post_id: str, dislike_removed_by_id: st
     """
     try:
         post: Post = Post.objects.get(id=post_id) # OPTIMIZE TO GET ONLY THE LIKES
+        user: User = User.objects.get(username=dislike_removed_by) # OPTIMIZE
     except Post.DoesNotExist:
         return Response({'error': 'Object does not exist'}, status=status.HTTP_404_NOT_FOUND)
     except ValidationError:
         return Response({'error': 'Object does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
-    post.remove_dislike(dislike_removed_by_id)
-    post.save()
+    user_id: str = str(user.profile.id)
+
+    post.remove_dislike(user_id)
 
     return Response({
         'success': 'so far so good',

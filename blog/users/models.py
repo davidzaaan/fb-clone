@@ -220,6 +220,7 @@ class Post(models.Model):
         if liked_by not in self.liked_by:
             self.liked_by.append(liked_by)
             self.likes += 1
+            self.save()
 
     
     def remove_like(self, liked_removed_by: str) -> None:
@@ -232,6 +233,7 @@ class Post(models.Model):
         if self.likes > 0:
             self.liked_by.remove(liked_removed_by)
             self.likes -= 1
+            self.save()
 
 
     def add_dislike(self, disliked_by: str) -> None:
@@ -244,6 +246,7 @@ class Post(models.Model):
         if disliked_by not in self.disliked_by:
             self.disliked_by.append(disliked_by)
             self.dislikes += 1
+            self.save()
 
 
     def remove_dislike(self, dislike_removed_by: str) -> None:
@@ -256,6 +259,7 @@ class Post(models.Model):
         if self.dislikes > 0:
             self.disliked_by.remove(dislike_removed_by)
             self.dislikes -= 1
+            self.save()
         
 
     def get_comments(self):

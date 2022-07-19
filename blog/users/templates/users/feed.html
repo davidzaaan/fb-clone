@@ -113,21 +113,21 @@
     <hr>
     <div class="interact">
       {% if current_user_id|has_liked:post.id %}
-      <button class="mybtn" id="like__btn_{{ post.id }}" onclick="like('{{post.id}}', '{{ current_user_id }}');" style="color: #2d85ff;">
+      <button class="mybtn" id="like__btn_{{ post.id }}" onclick="like('{{post.id}}', '{{ request.user.username }}');" style="color: #2d85ff;">
         Liked
       </button>
       {% else %}
-      <button class="mybtn" id="like__btn_{{ post.id }}" onclick="like('{{post.id}}', '{{ current_user_id }}');">
+      <button class="mybtn" id="like__btn_{{ post.id }}" onclick="like('{{post.id}}', '{{ request.user.username }}');">
         Like
       </button>
       {% endif %}
       <button class="mybtn" id="comment__btn" onclick="commentBoxFocus('comment_box_{{ post.id }}');">Comment</button>
       {% if current_user_id|has_disliked:post.id %}
-          <button class="mybtn" id="dislike__btn_{{ post.id }}" onclick="dislike('{{post.id}}', '{{ current_user_id }}');" style="color: #cc0001;">
+          <button class="mybtn" id="dislike__btn_{{ post.id }}" onclick="dislike('{{post.id}}', '{{ request.user.username }}');" style="color: #cc0001;">
             Disliked
           </button>
       {% else %}
-          <button class="mybtn" id="dislike__btn_{{ post.id }}" onclick="dislike('{{post.id}}', '{{ current_user_id }}');">
+          <button class="mybtn" id="dislike__btn_{{ post.id }}" onclick="dislike('{{post.id}}', '{{ request.user.username }}');">
             Dislike
           </button>
       {% endif %}

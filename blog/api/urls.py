@@ -17,6 +17,6 @@ urlpatterns = [
     path("posts/addlike/<str:post_id>/<str:liked_by>/", views.add_like),
     path("posts/remove_like/<str:post_id>/<str:like_removed_by>/", views.remove_like),
     path("posts/comment/<str:post_id>/<str:commented_by_id>/", views.add_comment),
-    path("posts/add_dislike/<str:post_id>/<str:disliked_by_id>/", views.add_dislike),
-    path("posts/remove_dislike/<str:post_id>/<str:dislike_removed_by_id>/", views.remove_dislike),
+    path("posts/add_dislike/<str:post_id>/<str:disliked_by>/", views.add_dislike),
+    path("posts/remove_dislike/<str:post_id>/<str:dislike_removed_by>/", views.remove_dislike),
 ]
