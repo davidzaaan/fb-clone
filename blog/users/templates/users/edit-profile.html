@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Edit / {{ request.user.profile.name }} {% endblock title %}
+
+{% block content %}
+{% include 'navbar.html' with navbar_title="Edit Profile" %}
+
+
+
+
+{% endblock content %}

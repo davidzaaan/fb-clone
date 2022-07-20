@@ -148,7 +148,7 @@ def profile(request: HttpRequest, pk: str) -> None:
 def edit_profile(request: HttpRequest, pk: str) -> None:
     # In order to manage images coming from the form we need...
     # request.POST, request.FILES
-    return HttpResponse("Editing profile...")
+    return render(request, 'users/edit-profile.html', {})
 
 
 @login_required
