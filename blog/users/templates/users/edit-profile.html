@@ -7,7 +7,51 @@
 {% block content %}
 {% include 'navbar.html' with navbar_title="Edit Profile" %}
 
-
-
-
+<div class="edit_profile__container">
+    <h1>Edit Profile</h1>
+    <form class="edit_profile__form" action="{% url 'edit_profile' request.user.profile.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="edit edit_name">
+            <label>Name</label>
+            <input type="text" name="name" value="{{form.instance.name}}">
+            {{ form.name.errors }}
+        </div>
+        
+        <div class="edit edit_email">
+            <label>Email</label>
+            <input type="email" name="email" value="{{form.instance.email}}">
+            {{ form.email.errors }}
+        </div>
+        
+        <div class="edit edit_bio">
+            <label>Bio</label>
+            <textarea name="bio" cols="0" rows="0">{{form.instance.bio}}</textarea>
+            {{ form.bio.errors }}
+        </div>
+        
+        <div class="edit edit_profile_photo">
+            <h2>Current profile photo </h2>
+            {{ form.profile_photo.errors }}
+            <img src="{{form.profile_photo.value.url}}">
+            <i>Change</i>
+            <input type="file" name="profile_photo">
+            </div>
+            
+            <div class="edit edit_cover_photo">
+                <h2>Current cover photo </h2>
+                {{ form.profile_photo.errors }}
+                <img src="{{form.cover_photo.value.url}}">
+                <i>Change</i>
+                <input type="file" name="cover_photo">
+            </div>
+            
+            <div class="edit edit_password">
+                <a href="#" style="text-decoration: none;">Edit password</a>
+            </div>
+            
+            <button type="submit">Save</button>      
+        </form>
+    </div>
+    <link rel="stylesheet" href="{% static 'css/edit-profile.css' %}">
 {% endblock content %}

@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .forms import ProfileForm, PostForm
+from .forms import EditProfileForm, ProfileForm, PostForm
 from .models import Profile, Post
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -146,9 +146,18 @@ def profile(request: HttpRequest, pk: str) -> None:
 
 @login_required
 def edit_profile(request: HttpRequest, pk: str) -> None:
-    # In order to manage images coming from the form we need...
-    # request.POST, request.FILES
-    return render(request, 'users/edit-profile.html', {})
+    profile: Profile = request.user.profile
+    form: EditProfileForm = EditProfileForm(instance=profile)
+
+    if request.method == "POST":
+        form = EditProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect("profile", profile.id)
+
+    return render(request, 'users/edit-profile.html', {
+        'form': form
+    })
 
 
 @login_required

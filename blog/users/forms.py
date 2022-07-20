@@ -30,7 +30,6 @@ class EditProfileForm(ModelForm):
             'name',
             'email',
             'bio',
-            'birthday',
             'profile_photo',
             'cover_photo'
         ]

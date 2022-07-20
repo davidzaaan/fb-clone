@@ -1,0 +1,77 @@
+.edit_profile__container {
+    width: 70%;
+    background-color: var(--post-bg);
+    margin: 50px auto;
+    padding-bottom: 10px;
+    color: var(--text-color);
+    border-radius: 10px;
+}
+
+h1 {
+    margin: 20px;
+    font-size: 1.9rem;
+}
+
+h2 {
+    font-size: 1.3rem;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    outline: none;
+    resize: none;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--text-boxes);
+    color: var(--text-color);
+    margin: 0px;
+}
+
+.edit_profile__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit_profile_photo img,
+.edit_cover_photo img {
+    width: 200px;
+    border-radius: 10px;
+}
+
+.edit {
+    margin-bottom: 30px;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+button {
+    background-color: #0084FF;
+    color: #fff;
+    margin: auto;
+    border: none;
+    border-radius: 3px;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 700px) {
+    .edit_profile__container {
+        width: 90%;
+    }
+
+    .edit_profile__form {
+        align-items: center;
+    }
+
+    .edit {
+        width: 60%;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        width: 100%;
+    }
+}
