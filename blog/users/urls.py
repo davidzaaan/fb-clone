@@ -11,8 +11,8 @@ urlpatterns = [
     path('register/', views.register_user, name="register"),
     path('home/', views.home, name="home"),
     path('post/<str:post_id>/', views.see_post, name="see_post"),
-    path('profile/<str:pk>/', views.profile, name="profile"),
-    path('edit-profile/<str:pk>/', views.edit_profile, name="edit_profile"),
+    path('profile/<str:username>/', views.profile, name="profile"),
+    path('edit-profile/', views.edit_profile, name="edit_profile"),
     path('photos/<str:pk>/', views.my_photos, name="my_photos"),
 
     # Forgot password handling

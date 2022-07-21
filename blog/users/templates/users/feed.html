@@ -60,7 +60,7 @@
 <div class="post">
   <div class="owner">
     <div class="owner-photo">
-      <a href="{% url 'profile' post.author.id %}">
+      <a href="{% url 'profile' post.author.user.username %}">
         <img src="{{ post.author.profile_photo.url }}" alt="{{ post.author.name }}">
       </a>
     </div>

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load friends %}
 
 {% block title %} Close Friends {% endblock title %}
 
@@ -27,8 +27,8 @@
                 <div class="card">
                     <img class="card-img-top" src="{{ friend.profile_photo.url }}" alt="Card image cap">
                     <div class="card-body">
-                    <h5 class="card-title">{{ friend.name }}</h5>
-                    <a id="remove_from_closefriends_{{friend.id}}" class="btn btn-danger" onclick="removeFriendFromCloseFriends('{{friend.id}}', '{{request.user.profile.id}}');">Remove from Close Friends</a>
+                        <h5 class="card-title">{{ friend.name }}</h5>
+                        <a id="remove_from_closefriends_{{friend.user.username|return_hashed}}" class="btn btn-danger" onclick="removeFriendFromCloseFriends('{{friend.user.username}}', '{{request.user.username}}', '{{friend.user.username|return_hashed}}');">Remove from Close Friends</a>
                     </div>
                 </div>
                 {% endfor %}

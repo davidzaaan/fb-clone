@@ -30,7 +30,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ friend.name }}</h5>
                             <div>
-                                <a id="add_fr_btn_{{friend.id}}" class="btn btn-primary" onclick="addFriend('{{ friend.id }}', '{{ request.user.profile.id }}');" style="background-color: #555;">Cancel friend request</a>
+                                <a id="add_fr_btn_{{friend.user.username|return_hashed}}" class="btn btn-primary" onclick="addFriend('{{ friend.user.username }}', '{{ request.user.username }}', '{{ friend.user.username|return_hashed }}');" style="background-color: #555;">Cancel friend request</a>
                             </div>
                         </div>
                     </div>

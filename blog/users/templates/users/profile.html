@@ -26,7 +26,7 @@
         <p>{{ profile.bio }}</p>
         <div class="profile-desc-options">
             <a href="{% url 'all-friends' %}?next=/friends">See my friends</a>
-            <a href="{% url 'edit_profile' profile.id %}">Edit profile</a>
+            <a href="{% url 'edit_profile' %}?next=/profile/{{request.user.username}}/">Edit profile</a>
             <a href="{% url 'my_photos' profile.id %}">Photos/Videos</a>
         </div>
     </div>

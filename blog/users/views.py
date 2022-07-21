@@ -137,15 +137,17 @@ def see_post(request: HttpRequest, post_id: str) -> None:
 
 
 @login_required
-def profile(request: HttpRequest, pk: str) -> None:
-    profile = Profile.objects.get(id=pk) # OPTIMIZE
+def profile(request: HttpRequest, username: str) -> None:
+    user: User = User.objects.get(username=username) # OPTIMIZE
+    profile: Profile = user.profile
+
     return render(request, 'users/profile.html', {
         "profile": profile,
     })
 
 
 @login_required
-def edit_profile(request: HttpRequest, pk: str) -> None:
+def edit_profile(request: HttpRequest) -> None:
     profile: Profile = request.user.profile
     form: EditProfileForm = EditProfileForm(instance=profile)
 
@@ -153,7 +155,7 @@ def edit_profile(request: HttpRequest, pk: str) -> None:
         form = EditProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect("profile", profile.id)
+            return redirect("profile", request.user.username)
 
     return render(request, 'users/edit-profile.html', {
         'form': form

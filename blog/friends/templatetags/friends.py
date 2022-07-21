@@ -27,3 +27,8 @@ def is_friend(user_id, friend_id):
 def is_closefriend(user_id, friend_id):
     user_profile: Profile = Profile.objects.get(id=user_id) # OPTIMZE
     return str(friend_id) in user_profile.close_friends
+
+
+@register.filter(name="return_hashed")
+def return_hashed(username: str) -> str:
+    return hash(username)

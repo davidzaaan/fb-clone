@@ -34,7 +34,7 @@
                         </i>
                         <div class="card-body-monthly">
                             {% for friend in friend_list %}
-                            <a href="{% url 'profile' friend.id %}" class="friends-birthday-image">
+                            <a href="{% url 'profile' friend.user.username %}" class="friends-birthday-image">
                                 <img class="card-img-top" src="{{ friend.profile_photo.url }}" alt="Card image cap">
                             </a>
                             {% endfor %}

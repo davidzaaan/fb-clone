@@ -196,17 +196,11 @@ def add_friend_request(request: HttpRequest, fr_sent_by: str, fr_sent_to: str) -
           fr_sent_to -> str: String containing the user id to from the user that receives the friend request
     Returns: Response -> Response type object with the updated state of sent and received friend requests
     """
-    sent_by: Profile = Profile.objects.get(id=fr_sent_by)
-    sent_to: Profile = Profile.objects.get(id=fr_sent_to)
+    sent_by: User = User.objects.get(username=fr_sent_by).profile # OPTIMIZE
+    sent_to: User = User.objects.get(username=fr_sent_to).profile # OPTIMIZE
 
-    sent_by.add_to_sent_fr(fr_sent_to)
-    sent_to.add_friend_request(fr_sent_by)
-
-    # sent_by.save()
-    # sent_to.save()
-
-    # print(sent_by.sent_friend_requests)
-    # print(sent_to.friend_requests)
+    sent_by.add_to_sent_fr(str(sent_to.id))
+    sent_to.add_friend_request(str(sent_by.id))
 
     return Response({
         'success': 'Friend request added'
@@ -214,7 +208,7 @@ def add_friend_request(request: HttpRequest, fr_sent_by: str, fr_sent_to: str) -
 
 
 @api_view(['PATCH'])
-def undo_friend_request(request: HttpRequest, user_id: str, fr_to_remove: str) -> Response:
+def undo_friend_request(request: HttpRequest, curr_user_username: str, fr_to_remove_username: str) -> Response:
     """
     Function that undo a friend request sent by fr_sent_by
     Args: request -> HttpRequest type object
@@ -222,18 +216,11 @@ def undo_friend_request(request: HttpRequest, user_id: str, fr_to_remove: str) -
           fr_sent_to -> str: String containing the user id to from the user that received the friend request
     Returns: Response -> Response type object with the updated state of sent and received friend requests
     """
-    sent_by: Profile = Profile.objects.get(id=user_id)
-    sent_to: Profile = Profile.objects.get(id=fr_to_remove)
+    sent_by: Profile = User.objects.get(username=curr_user_username).profile # OPTIMIZE
+    sent_to: Profile = User.objects.get(username=fr_to_remove_username).profile # OPTIMIZE
 
-    sent_by.undo_fr(fr_to_remove)
-    sent_to.remove_fr(user_id)
-
-    # sent_by.save()
-    # sent_to.save()
-
-    # print(sent_by.sent_friend_requests)
-    # print(sent_to.friend_requests)
-
+    sent_by.undo_fr(str(sent_to.id))
+    sent_to.remove_fr(str(sent_by.id))
 
     return Response({
         'success': 'Friend request removed'
@@ -241,7 +228,7 @@ def undo_friend_request(request: HttpRequest, user_id: str, fr_to_remove: str) -
 
 
 @api_view(['PATCH'])
-def delete_friend_request(request: HttpRequest, user_id: str, fr_id_to_delete: str) -> Response:
+def delete_friend_request(request: HttpRequest, curr_user_username: str, fr_username_to_delete: str) -> Response:
     """
     Function that deletes a friend request from the user object list called 'friend_requests'
     Args: request -> HttpRequest type object
@@ -249,11 +236,11 @@ def delete_friend_request(request: HttpRequest, user_id: str, fr_id_to_delete: s
           fr_id_to_delete -> str: String containing the user id that the current user session wants to delete from its list
     Returns: Response -> Response type object with the updated state of the friend requests list
     """
-    user: Profile = Profile.objects.get(id=user_id) # OPTIMIZE
-    receiver: Profile = Profile.objects.get(id=fr_id_to_delete)
+    user: Profile = User.objects.get(username=curr_user_username).profile
+    receiver: Profile = User.objects.get(username=fr_username_to_delete).profile
 
-    user.remove_fr(fr_id_to_delete)
-    receiver.undo_fr(user_id)
+    user.remove_fr(str(receiver.id))
+    receiver.undo_fr(str(user.id))
 
     return Response({
         'success': 'Friend request deleted successfully'
@@ -262,7 +249,7 @@ def delete_friend_request(request: HttpRequest, user_id: str, fr_id_to_delete: s
 
 
 @api_view(['PATCH'])
-def add_friend(request: HttpRequest, user_id: str, new_friend_id: str) -> Response:
+def add_friend(request: HttpRequest, curr_user_username: str, new_friend: str) -> Response:
     """
     Function that adds a new friend request to both the user in session to the user selected to the request be sent
     Args: request -> HttpRequest type object
@@ -270,16 +257,13 @@ def add_friend(request: HttpRequest, user_id: str, new_friend_id: str) -> Respon
           fr_sent_to -> str: String containing the user id to from the user that receives the friend request
     Returns: Response -> Response type object with the updated state of sent and received friend requests
     """
-    print("USER ID", user_id)
-    print("TO", new_friend_id)
+    user: Profile = User.objects.get(username=curr_user_username).profile
+    new_friend: Profile = User.objects.get(username=new_friend).profile
 
-    user: Profile = Profile.objects.get(id=user_id)
-    new_friend: Profile = Profile.objects.get(id=new_friend_id)
-
-    user.remove_fr(new_friend_id) # remove the FR from the user's FR list...
-    new_friend.undo_fr(user_id) # undo the FR from the already made sent FR...
-    user.add_friend(new_friend_id) # add the new user to the current user session friends...
-    new_friend.add_friend(user_id) # add the current user session to the target user friends list
+    user.remove_fr(str(new_friend.id)) # remove the FR from the user's FR list...
+    new_friend.undo_fr(str(user.id)) # undo the FR from the already made sent FR...
+    user.add_friend(str(new_friend.id)) # add the new user to the current user session friends...
+    new_friend.add_friend(str(user.id)) # add the current user session to the target user friends list
 
     return Response({
         'success': 'Friend added'
@@ -287,7 +271,7 @@ def add_friend(request: HttpRequest, user_id: str, new_friend_id: str) -> Respon
 
 
 @api_view(['PATCH'])
-def remove_friend(request: HttpRequest, user_id: str, friend_to_remove_id: str) -> Response:
+def remove_friend(request: HttpRequest, curr_user_username: str, friend_to_remove_username: str) -> Response:
     """
     Function that removes friend request to both the
     Args: request -> HttpRequest type object
@@ -295,15 +279,14 @@ def remove_friend(request: HttpRequest, user_id: str, friend_to_remove_id: str) 
           fr_to_remove -> str: String that contains the user id to delete from the friends list of the main user
     Returns: Response -> Response type object with the updated state of sent and received friend requests
     """
-    user: Profile = Profile.objects.get(id=user_id) # OPTIMIZE
-    
-    ex_friend: Profile = Profile.objects.get(id=friend_to_remove_id) # OPTIMIZE
+    user: Profile = User.objects.get(username=curr_user_username).profile # OPTIMIZE
+    ex_friend: Profile = User.objects.get(username=friend_to_remove_username).profile # OPTIMIZE
 
-    user.remove_friend(friend_to_remove_id)
-    user.remove_from_closefriends(friend_to_remove_id)
+    user.remove_friend(str(ex_friend.id))
+    user.remove_from_closefriends(str(ex_friend.id))
 
-    ex_friend.remove_friend(user_id)
-    ex_friend.remove_from_closefriends(user_id)
+    ex_friend.remove_friend(str(user.id))
+    ex_friend.remove_from_closefriends(str(user.id))
 
     return Response({
         'success': 'friend deleted successfully'
@@ -311,7 +294,7 @@ def remove_friend(request: HttpRequest, user_id: str, friend_to_remove_id: str) 
 
 
 @api_view(['PATCH'])
-def add_friend_to_closefriends(request: HttpRequest, user_id: str, new_closefriend_id: str) -> Response:
+def add_friend_to_closefriends(request: HttpRequest, curr_user_username: str, new_closefriend_username: str) -> Response:
     """
     Function that removes friend request to both the
     Args: request -> HttpRequest type object
@@ -319,9 +302,10 @@ def add_friend_to_closefriends(request: HttpRequest, user_id: str, new_closefrie
           new_closefriend_id -> str: String that contains the user id to add to the current user close friends list
     Returns: Response -> Response type object with the updated state list of the current user's close friends list
     """
-    user: Profile = Profile.objects.get(id=user_id) # OPTIMIZE
+    user: Profile = User.objects.get(username=curr_user_username).profile # OPTIMIZE
+    new_close_friend: Profile = User.objects.get(username=new_closefriend_username).profile # OPTIMIZE
 
-    user.add_to_closefriends(new_closefriend_id)
+    user.add_to_closefriends(str(new_close_friend.id))
 
     return Response({
         'success': 'Friend added successfully to close friends'
@@ -329,7 +313,7 @@ def add_friend_to_closefriends(request: HttpRequest, user_id: str, new_closefrie
 
 
 @api_view(['PATCH'])
-def remove_friend_from_closefriends(request: HttpRequest, user_id: str, ex_closefriend_id: str) -> Response:
+def remove_friend_from_closefriends(request: HttpRequest, curr_user_username: str, ex_closefriend_username: str) -> Response:
     """
     Function that removes friend request to both the
     Args: request -> HttpRequest type object
@@ -337,9 +321,10 @@ def remove_friend_from_closefriends(request: HttpRequest, user_id: str, ex_close
           ex_closefriend_id -> str: String that contains the former friend id that the current user wants to remove from close_friends list
     Returns: Response -> Response type object with the updated state list of the current user's close friends list
     """
-    user: Profile = Profile.objects.get(id=user_id)
+    user: Profile = User.objects.get(username=curr_user_username).profile
+    ex_close_friend: Profile = User.objects.get(username=ex_closefriend_username).profile
 
-    user.remove_from_closefriends(ex_closefriend_id)
+    user.remove_from_closefriends(str(ex_close_friend.id))
 
     return Response({
         'success': 'Friend removed successfully from close friends'

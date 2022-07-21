@@ -31,12 +31,12 @@
                                 <h5 class="card-title">{{ friend.name }}</h5>
                                 <div>
                                     {% if request.user.profile.id|has_sent_a_fr:friend.id %}
-                                        <a id="add_fr_btn_{{friend.id}}" class="btn btn-primary" onclick="addFriend('{{ friend.id }}', '{{ request.user.profile.id }}');" style="background-color: #555;">Cancel friend request</a>
+                                        <a id="add_fr_btn_{{friend.user.username|return_hashed}}" class="btn btn-primary" onclick="addFriend('{{ friend.user.username }}', '{{ request.user.username }}', '{{ friend.user.username|return_hashed }}');" style="background-color: #555;">Cancel friend request</a>
                                     {% elif request.user.profile.id|is_in_fr:friend.id %}
-                                        <a id="accept_fr_btn_{{friend.id}}" class="btn btn-primary" onclick="acceptFR('{{ friend.id }}', '{{ request.user.profile.id }}');">Accept friend request</a>
-                                        <a id="delete_fr_btn_{{friend.id}}" class="btn btn-primary" onclick="deleteFR('{{ friend.id }}', '{{ request.user.profile.id }}');" style="background-color: #555;">Delete</a>
+                                        <a id="accept_fr_btn_{{friend.user.username|return_hashed}}" class="btn btn-primary" onclick="acceptFR('{{ friend.user.username }}', '{{ request.user.username }}', '{{ friend.user.username|return_hashed }}');">Accept friend request</a>
+                                        <a id="delete_fr_btn_{{friend.user.username|return_hashed}}" class="btn btn-primary" onclick="deleteFR('{{ friend.user.username }}', '{{ request.user.username }}', '{{ friend.user.username|return_hashed }}');" style="background-color: #555;">Delete</a>
                                     {% else %}
-                                        <a id="add_fr_btn_{{friend.id}}" class="btn btn-primary" onclick="addFriend('{{ friend.id }}', '{{ request.user.profile.id }}');">Add Friend</a>
+                                        <a id="add_fr_btn_{{friend.user.username|return_hashed}}" class="btn btn-primary" onclick="addFriend('{{ friend.user.username }}', '{{ request.user.username }}', '{{ friend.user.username|return_hashed }}');">Add Friend</a>
                                     {% endif %}
                                 </div>
                             </div>

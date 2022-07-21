@@ -15,7 +15,7 @@
                     <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                 </svg>
             </a>
-            <h1>All friends</h1>
+            <h1>My friends</h1>
         </div>
     </div>
 
@@ -30,11 +30,11 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ friend.name }}</h5>
                             {% if request.user.profile.id|is_closefriend:friend.id %}
-                                <a id="add_to_cf_{{friend.id}}" class="btn btn-success">Close Friend</a>
-                                <a id="remove_friend_{{friend.id}}" class="btn btn-danger" onclick="deleteFriend('{{friend.id}}', '{{request.user.profile.id}}');">Unfriend</a>
+                                <a id="add_to_cf_{{friend.user.username|return_hashed}}" class="btn btn-success">Close Friend</a>
+                                <a id="remove_friend_{{friend.user.username|return_hashed}}" class="btn btn-danger" onclick="deleteFriend('{{friend.user.username}}', '{{request.user.username}}', '{{friend.user.username|return_hashed}}');">Unfriend</a>
                             {% else %}
-                                <a id="add_to_cf_{{friend.id}}" class="btn btn-success" onclick="addFriendToCloseFriends('{{friend.id}}', '{{request.user.profile.id}}');">Add to Close Friends</a>
-                                <a id="remove_friend_{{friend.id}}" class="btn btn-danger" onclick="deleteFriend('{{friend.id}}', '{{request.user.profile.id}}');">Unfriend</a>
+                                <a id="add_to_cf_{{friend.user.username|return_hashed}}" class="btn btn-success" onclick="addFriendToCloseFriends('{{friend.user.username}}', '{{request.user.username}}', '{{friend.user.username|return_hashed}}');">Add to Close Friends</a>
+                                <a id="remove_friend_{{friend.user.username|return_hashed}}" class="btn btn-danger" onclick="deleteFriend('{{friend.user.username}}', '{{request.user.username}}', '{{friend.user.username|return_hashed}}');">Unfriend</a>
                             {% endif %}
                         </div>
                     </div>
