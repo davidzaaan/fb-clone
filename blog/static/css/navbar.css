@@ -22,15 +22,17 @@ body.dark-mode {
     --navbar-bg-color: #242527;
 }
 
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
 
 .main-navbar {
     background-color: var(--navbar-bg-color);
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-    /* position: fixed;
-    top: 0%;
-    margin-bottom: 20px; */
 }
 
 #navbar-brand {
