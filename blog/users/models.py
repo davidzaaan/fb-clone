@@ -10,7 +10,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, null=True)
     name = models.CharField(max_length=180)
     email = models.EmailField(max_length=150)
-    bio = models.CharField(max_length=70, null=True, blank=True)
+    bio = models.CharField(max_length=70, null=True, blank=True, default="")
     birthday = models.DateField(null=True, editable=True, default=now)
     created = models.DateTimeField(auto_now_add=True)
     # password = models.CharField(max_length=180)

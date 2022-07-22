@@ -22,14 +22,24 @@
         <h1>{{ profile.name }}</h1>
     </div>
 
-    <div class="profile-page-profile-desc">
-        <p>{{ profile.bio }}</p>
-        <div class="profile-desc-options">
-            <a href="{% url 'all-friends' %}?next=/friends">See my friends</a>
-            <a href="{% url 'edit_profile' %}?next=/profile/{{request.user.username}}/">Edit profile</a>
-            <a href="{% url 'my_photos' profile.id %}">Photos/Videos</a>
+    {% if request.user.profile.id == profile.id %}
+        <div class="profile-page-profile-desc">
+            <p>{{ profile.bio }}</p>
+            <div class="profile-desc-options">
+                <a href="{% url 'all-friends' profile.user.username %}?next=/friends">See my friends</a>
+                <a href="{% url 'edit_profile' %}?next=/profile/{{request.user.username}}/">Edit profile</a>
+                <a href="{% url 'my_photos' profile.id %}">Photos/Videos</a>
+            </div>
         </div>
-    </div>
+    {% else %}
+        <div class="profile-page-profile-desc">
+            <p>{{ profile.bio }}</p>
+            <div class="profile-desc-options">
+                <a href="{% url 'all-friends' profile.user.username %}?next=/friends">Friends</a>
+                <a href="{% url 'my_photos' profile.id %}">Photos/Videos</a>
+            </div>
+        </div>
+    {% endif %}
 </div>
 
 <script src="{% static 'js/profile.js' %}"></script>

@@ -1,6 +1,7 @@
 from django.http import HttpRequest
 from django.shortcuts import render
 from users.models import Profile
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .utils import get_friends_birthdays, get_user_friendlist
 
@@ -57,13 +58,15 @@ def friend_suggestions(request: HttpRequest):
 
 
 @login_required
-def friends_all(request: HttpRequest):
-    user: Profile = Profile.objects.get(id=request.user.profile.id) # OPTIMIZE
+def friends_all(request: HttpRequest, user_username: str):
+    user: Profile = User.objects.get(username=user_username).profile # OPTIMIZE
 
     all_friends: list = get_user_friendlist(user.friends)
 
     return render(request, 'friends/friends-all.html', {
-        'all_friends': all_friends
+        'all_friends': all_friends,
+        'profile': user,
+        'profile_name': user.name.split(" ")[0]
     })
 
 
