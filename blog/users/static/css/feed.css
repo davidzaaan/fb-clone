@@ -154,6 +154,11 @@
     font-weight: bold;
 }
 
+#author a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
 /* ----- Description styling ---- */
 
 /* ----- Picture styling ------ */

@@ -30,7 +30,9 @@
                 {% for friend in all_friends %}
                     {% if friend %}
                     <div class="card">
-                        <img class="card-img-top" src="{{ friend.profile_photo.url }}" alt="Card image cap">
+                        <a href="{% url 'profile' friend.user.username %}" class="image_redirectioner">
+                            <img class="card-img-top" src="{{ friend.profile_photo.url }}" alt="Card image cap">
+                        </a>
                         <div class="card-body">
                             <h5 class="card-title">{{ friend.name }}</h5>
                             {% if profile.id == request.user.profile.id %}

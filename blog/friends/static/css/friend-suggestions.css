@@ -102,6 +102,15 @@
     color: var(--text-color);
 }
 
+.image_redirectioner {
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-position: center;
+}
+
 .card img {
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;

@@ -65,7 +65,7 @@
       </a>
     </div>
     <div class="owner-stats">
-      <span id="author">{{ post.author.name }}</span>
+      <span id="author"><a href="{% url 'profile' post.author.user.username %}">{{ post.author.name }}</a></span>
       <br>
       <span id="date-of-posted">{{ post.timestamp }}</span>
     </div>
