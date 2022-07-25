@@ -4,6 +4,7 @@
 {% block title %} {{ profile.name }} | My Blog {% endblock title %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% include 'navbar.html' with navbar_title='Profile' %}
 
 <div class="profile-page-container">
@@ -43,5 +44,4 @@
 </div>
 
 <script src="{% static 'js/profile.js' %}"></script>
-<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% endblock content %}
