@@ -94,6 +94,13 @@ svg {
     display: none;
 }
 
+input[type="search"] {
+    background-color: var(--text-boxes);
+    color: var(--text-color);
+    border: none;
+    outline: none;
+}
+
 
 /* .dark-mode {
     background-color: #242526;
